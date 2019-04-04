@@ -26,5 +26,5 @@ jobs:
       # notify featurepeek
       - run:
           name: Pinging FeaturePeek
-          command: npm run featurepeek
+          command: yarn featurepeek
 
