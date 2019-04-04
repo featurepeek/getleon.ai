@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test:
+  build:
     working_directory: ~/leon
     docker:
       - image: circleci/node:8.11
