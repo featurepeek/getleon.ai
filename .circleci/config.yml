@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/leon
+    docker:
+      - image: circleci/node:8.11
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: main-dependency-cache-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          key: main-dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+
+      - run: 
+          name: Build static site
+          command: npm run generate
+
+      # store static artifacts
+      - store_artifacts:
+          path: ./dist
+
+      # notify featurepeek
+      - run:
+          name: Pinging FeaturePeek
+          command: npm run featurepeek
+
