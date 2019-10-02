@@ -19,12 +19,8 @@ jobs:
           name: Build static site
           command: npm run generate
 
-      # store static artifacts
-      - store_artifacts:
-          path: ./dist
-
       # notify featurepeek
       - run:
           name: Pinging FeaturePeek
-          command: yarn featurepeek
+          command: bash <(curl -s https://peek.run/ci)
 
